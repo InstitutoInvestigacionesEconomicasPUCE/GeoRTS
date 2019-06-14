@@ -1,10 +1,9 @@
-
-ts_plotJ=function(TS,RTS){
+#================================================
+rts_plotGroup=function(TS,RTS){
   require(ggplot2)
   require(reshape2)
   require(viridis)
   #Data frame for TS
-  # RTS = geoRts(TS,positions.TS,weights.TS,positions.RTS,weights.RTS)
   
   Dates = seq.Date(from = as.Date(paste(c(start(TS),1),collapse = "/")),
                    by="month" ,length.out = dim(TS)[1] )  
@@ -20,13 +19,13 @@ ts_plotJ=function(TS,RTS){
   
   
   
-  plx = melt(x,id.vars = "Dates",na.rm = T)
+  plx = melt(x,id.vars = "Dates",na.rm = FALSE)
   plx$Tipo="Original"
   
-  plrx=melt(rx,id.vars = "Dates",na.rm = T)
+  plrx=melt(rx,id.vars = "Dates",na.rm = FALSE)
   plrx$Tipo="Reconstruidas"  
   
-  series = rbind(plx,plrx)
+  # series = rbind(plx,plrx)
   
   
   # ......................
@@ -35,14 +34,13 @@ ts_plotJ=function(TS,RTS){
                     y = "value")) +
     geom_line(size = 0.8,
               aes(color = variable),
-              linetype="dashed",alpha=I(0.5)) + 
-    geom_line(data = plx , size = 1.2, 
+              # linetype="dashed",
+              alpha=I(0.3)) + 
+    geom_line(data = plx , size = 1.1, 
               aes(color = variable)) +
+    # geom_point(color="grey") +
     scale_color_grey(start = 0.1, end = 0.1, na.value= "red") + 
-    geom_point(aes(color = variable)) +
     theme_minimal()
-  
-  
   
 }
 

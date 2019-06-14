@@ -1,5 +1,14 @@
 # Example GeoRTS ------------------------
-set.seed(2)
+
+source("georts.R")
+source("rts_clean.R")
+source("rts_simu.R")
+source("rts_distrib.R")
+source("rts_plot.R")
+source("rts_plotGroup.R")
+
+
+set.seed(3)
 # Tenemos m series conocidas
 m = 3
 p= 50
@@ -15,11 +24,14 @@ positions.TS = data.frame(lon = rnorm(m,0,10),lat=rnorm(m,30,10))
 weights.TS = round(runif(m,1,10))
 
 
-# Reconstruir n series a partir de posiciones
+# Reconstruir n series  ==================
 n=5
 positions.RTS = data.frame(lon = rnorm(n,0,10),lat=rnorm(n,30,10))
 weights.RTS = round(runif(n,5,15))
 
 
 RTS = geoRts(TS,positions.TS,weights.TS,positions.RTS,weights.RTS)
+
+#Grafico de Series    ====================
+rts_plotGroup(TS,RTS)
 
