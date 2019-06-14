@@ -36,37 +36,20 @@ geoRts = function(TS,positions.TS,weights.TS = NULL,positions.RTS,weights.RTS=NU
   # Reconstruction of Time Series
   RTS = TS%*%t(As)
   RTS = ts(RTS,start = start(TS),frequency = frequency(TS))
-  colnames(RTS) = paste0("Serie",(N-n):N)
+  colnames(RTS) = paste0("Serie",(n+1):N)
   
   # RTS Plot
-  if(plots){
+  if(plots & (N-n)<=5){
     pl = list()
     for(k in seq(N-n)){
       pl[[k]] = rts_plot(RTS,n_variable = k)
     }
     gridExtra::grid.arrange(grobs=pl,nrow=N-n)
-    }
+  }
   
   return(RTS)
   
 }
-
-
-# Example ------------------------
-set.seed(1)
-TS = ts(data=data.frame(x1=rnorm(40),
-                        x2=rnorm(40,10,2),
-                        x3=rnorm(40,30,3)),
-        start = c(2000,1),frequency = 12)
-positions.TS = data.frame(lon = rnorm(3,0,10),lat=rnorm(3,30,10))
-weights.TS = round(runif(3,1,10))
-
-
-positions.RTS = data.frame(lon = rnorm(4,0,10),lat=rnorm(4,30,10))
-weights.RTS = round(runif(4,1,10))
-
-
-y = geoRts(TS,positions.TS,weights.TS,positions.RTS,weights.RTS)
 
 
 
