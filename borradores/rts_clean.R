@@ -1,5 +1,4 @@
 # ===============================================
-
 rts_clean=function(TS, seasonal=T, s=12, tr=36 ){
   require(stlplus)
   n=dim(TS)[2]

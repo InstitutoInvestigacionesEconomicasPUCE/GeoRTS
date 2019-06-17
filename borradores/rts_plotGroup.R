@@ -2,7 +2,7 @@
 rts_plotGroup=function(TS,RTS){
   require(ggplot2)
   require(reshape2)
-  require(viridis)
+  # require(viridis)
   #Data frame for TS
   
   Dates = seq.Date(from = as.Date(paste(c(start(TS),1),collapse = "/")),
@@ -17,8 +17,6 @@ rts_plotGroup=function(TS,RTS){
   rx=as.data.frame(RTS)
   rx$Dates = Dates
   
-  
-  
   plx = melt(x,id.vars = "Dates",na.rm = FALSE)
   plx$Tipo="Original"
   
@@ -26,7 +24,6 @@ rts_plotGroup=function(TS,RTS){
   plrx$Tipo="Reconstruidas"  
   
   # series = rbind(plx,plrx)
-  
   
   # ......................
   ggplot(data = plrx, 

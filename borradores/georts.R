@@ -16,7 +16,6 @@ geoRts = function(TS,positions.TS,weights.TS = NULL,positions.RTS,weights.RTS=NU
       if(d!=0){
         G[i,j] = (weights[i]*weights[j])/d
       }
-      
     }
   }
   

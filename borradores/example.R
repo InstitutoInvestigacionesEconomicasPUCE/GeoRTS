@@ -35,3 +35,13 @@ RTS = geoRts(TS,positions.TS,weights.TS,positions.RTS,weights.RTS)
 #Grafico de Series    ====================
 rts_plotGroup(TS,RTS)
 
+# 2. Limpieza  ===========================
+TS_clean = rts_clean(TS)
+
+pl = list()
+for (i in seq(dim(TS)[2])) {
+  pl[[i]] = rts_plotClean(TS,i)
+}
+
+grid.arrange(grobs=pl,nrow=dim(TS)[2])
+
