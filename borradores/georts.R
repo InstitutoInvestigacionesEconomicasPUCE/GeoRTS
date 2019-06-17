@@ -11,8 +11,12 @@ geoRts = function(TS,positions.TS,weights.TS = NULL,positions.RTS,weights.RTS=NU
   G = matrix(NA, nrow = N,ncol = n)
   A = G
   for (i in seq(N)) {
-    for(j in seq(n)){
+    for(j in seq(n)){    
+      if(is.null(D)){
       d = sum((positions[i,]-positions.TS[j,])^2)
+      }else{
+      d = D[i,j]
+      }
       if(d!=0){
         G[i,j] = (weights[i]*weights[j])/d
       }
